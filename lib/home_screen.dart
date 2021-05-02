@@ -1,3 +1,4 @@
+import 'package:bmi_app/bmi_screen_result.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'bmi_card.dart';
@@ -87,7 +88,6 @@ class _HomeScreenState extends State<HomeScreen> {
                               "Height",
                               style: TextStyle(fontWeight: FontWeight.bold),
                             ),
-                            
                             Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               crossAxisAlignment: CrossAxisAlignment.baseline,
@@ -103,9 +103,10 @@ class _HomeScreenState extends State<HomeScreen> {
                             ),
                             SliderTheme(
                               data: SliderTheme.of(context).copyWith(
-                                thumbShape: RoundSliderThumbShape(enabledThumbRadius: 10),
-                                
-                                overlayShape: RoundSliderOverlayShape(overlayRadius: 25),
+                                thumbShape: RoundSliderThumbShape(
+                                    enabledThumbRadius: 10),
+                                overlayShape:
+                                    RoundSliderOverlayShape(overlayRadius: 25),
                               ),
                               child: Slider(
                                 activeColor: pinkColor,
@@ -216,26 +217,34 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ),
               ),
-              Container(
-                padding: EdgeInsets.all(10),
-                alignment: Alignment.center,
-                margin: EdgeInsets.all(15),
-                height: 56,
-                width: MediaQuery.of(context).size.width * 0.50,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20),
-                    color: pinkColor,
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.grey[400],
-                        blurRadius: 80,
-                      )
-                    ]),
-                child: Text(
-                  "CALCULATE",
-                  style: TextStyle(
-                    fontSize: 20,
-                    color: Colors.white,
+              GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => BmiScreenResult()));
+                },
+                child: Container(
+                  padding: EdgeInsets.all(10),
+                  alignment: Alignment.center,
+                  margin: EdgeInsets.all(15),
+                  height: 56,
+                  width: MediaQuery.of(context).size.width * 0.50,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20),
+                      color: pinkColor,
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey[400],
+                          blurRadius: 80,
+                        )
+                      ]),
+                  child: Text(
+                    "CALCULATE",
+                    style: TextStyle(
+                      fontSize: 20,
+                      color: Colors.white,
+                    ),
                   ),
                 ),
               )
