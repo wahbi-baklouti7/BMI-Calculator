@@ -1,3 +1,4 @@
+import 'package:bmi_app/bmi_calculator.dart';
 import 'package:bmi_app/bmi_screen_result.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -112,6 +113,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 activeColor: pinkColor,
                                 inactiveColor: Color(0xFFEBAB36),
                                 value: height.toDouble(),
+                                min: 120,
                                 max: 220,
                                 onChanged: (double newValue) {
                                   setState(() {
@@ -153,7 +155,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                     buttonIcon: FontAwesomeIcons.plus,
                                     onPress: () {
                                       setState(() {
-                                        age++;
+                                        if (age < 110) {
+                                          age++;
+                                        }
                                       });
                                     },
                                   ),
@@ -165,7 +169,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                       iconColor: pinkColor,
                                       onPress: () {
                                         setState(() {
-                                          age--;
+                                          if (age >= 15) {
+                                            age--;
+                                          }
                                         });
                                       })
                                 ],
@@ -193,7 +199,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                   buttonIcon: FontAwesomeIcons.plus,
                                   onPress: () {
                                     setState(() {
-                                      weight++;
+                                      if (weight <= 200) {
+                                        weight++;
+                                      }
                                     });
                                   },
                                 ),
@@ -205,7 +213,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                     iconColor: pinkColor,
                                     onPress: () {
                                       setState(() {
-                                        weight--;
+                                        if (weight >= 40) {
+                                          weight--;
+                                        }
                                       });
                                     })
                               ],
@@ -219,10 +229,16 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               GestureDetector(
                 onTap: () {
+                  BmiCalculate calc =
+                      BmiCalculate(height: height, weight: weight);
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => BmiScreenResult()));
+                          builder: (context) => BmiScreenResult(
+                                result: calc.calculateBmi(),
+                                msg: calc.getResult(),
+                                desc: calc.getInterpretation(),
+                              )));
                 },
                 child: Container(
                   padding: EdgeInsets.all(10),
